@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player </title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<body>
+    <div class="container">
+        <div class="music-player">
+            <nav>
+                <div class="circle">
+                    <i class='bx bx-chevron-left'></i>
+                </div>
+                <div class="circle">
+                    <i class='bx bxs-playlist'></i>
+                </div>
+            </nav>
+            <img src="media/maahi.jfif" class="song-img">
+            <h1>O Mahi O Mahi (Dunki)</h1>
+            <p>Arijit Singh</p>
+            <audio id="song">
+                <source src="media/O Maahi - Dunki 128 Kbps.mp3" type="audio/mpeg">
+            </audio>
+            <input type="range" id="progress" value="0">
+            <div class="controls">
+                <div><i class='bx bx-skip-previous'></i> </div>
+                <div onclick="PlayPause()"><i class='bx bx-play' id="ctrlicon"></i></div>
+                <div><i class='bx bx-skip-next'></i></div>
+            </div>
+
+        </div>
+    </div>
+<script>
+     let progress = document.getElementById("progress");
+        let song = document.getElementById("song");
+        let ctrlicon = document.getElementById("ctrlicon");
+
+        // Set the max value of progress when metadata is loaded
+        song.onloadedmetadata = function() {
+            progress.max = song.duration;
+            progress.value = song.currentTime;
+        };
+
+        // Update progress value as the song plays
+        song.ontimeupdate = function() {
+            progress.value = song.currentTime;
+        };
+
+        // Seek the song when the progress input is changed
+        progress.addEventListener('input', function() {
+            song.currentTime = progress.value;
+        });
+
+        // Play or pause the song and change the icon
+        function PlayPause() {
+            if (ctrlicon.classList.contains('bx-pause')) {
+                song.pause();
+                ctrlicon.classList.remove('bx-pause');
+                ctrlicon.classList.add('bx-play');
+            } else {
+                song.play();
+                ctrlicon.classList.add('bx-pause');
+                ctrlicon.classList.remove('bx-play');
+            }
+        }
+    </script>
+    </script>
+
+
+
+
+
+</body>
+
+</html>
